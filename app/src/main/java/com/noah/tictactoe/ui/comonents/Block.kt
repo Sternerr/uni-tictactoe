@@ -13,7 +13,7 @@ fun Block(
     content: @Composable () -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(padding)
+        modifier = Modifier.padding(horizontal = padding)
     ) {
         content()
     }
