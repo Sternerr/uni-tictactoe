@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +18,7 @@ fun Container(
 ) {
     Column(
         modifier = Modifier
-            .background(Color(0xFF202028))
+            .background(MaterialTheme.colorScheme.surface)
             .fillMaxSize(),
 
         verticalArrangement = Arrangement.Center,
