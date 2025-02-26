@@ -1,31 +1,12 @@
-package com.noah.tictactoe
+package com.noah.tictactoe.data
 
 import android.util.Log
-import androidx.compose.animation.core.snap
-import androidx.compose.runtime.referentialEqualityPolicy
 import androidx.lifecycle.ViewModel
-import androidx.room.Dao
-import androidx.room.Database
-import androidx.room.Entity
-import androidx.room.Insert
-import androidx.room.PrimaryKey
-import androidx.room.Query
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.google.firebase.firestore.Exclude
-import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.noah.tictactoe.data.model.Game
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import java.lang.Thread.State
-
-data class Game (
-    val board: List<Int> = List(9) { 2 },
-    val players: List<String> = listOf(),
-    val turn: Int = 0,
-    val gameState: String = "",
-)
 
 class GameViewModel: ViewModel() {
     private val firestore = Firebase.firestore

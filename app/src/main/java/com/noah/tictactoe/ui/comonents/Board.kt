@@ -13,7 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.noah.tictactoe.GameViewModel
+import com.noah.tictactoe.data.GameViewModel
 import com.noah.tictactoe.data.PlayerViewModel
 
 @Composable
