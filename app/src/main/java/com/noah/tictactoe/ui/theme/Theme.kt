@@ -14,7 +14,9 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = CustomColor.Primary,
-    surface = CustomColor.Surface
+    surface = CustomColor.Surface,
+    surfaceContainer = CustomColor.SurfaceContainer,
+    onSurface = CustomColor.onSurface
 )
 
 @Composable
