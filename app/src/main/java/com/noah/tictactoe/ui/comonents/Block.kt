@@ -2,6 +2,7 @@ package com.noah.tictactoe.ui.comonents
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,7 +16,10 @@ fun Block(
     content: @Composable () -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(horizontal = padding),
+        modifier = Modifier
+            .padding(horizontal = padding)
+            .fillMaxWidth(),
+
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

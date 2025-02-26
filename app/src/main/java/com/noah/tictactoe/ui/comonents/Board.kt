@@ -8,19 +8,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.noah.tictactoe.GameViewModel
-import com.noah.tictactoe.PlayerViewModel
+import com.noah.tictactoe.data.PlayerViewModel
 
 @Composable
 fun Board(playerViewModel: PlayerViewModel, gameViewModel: GameViewModel, gameID: String) {
     val playerMap = playerViewModel.playerMap.collectAsStateWithLifecycle()
     val gameMap = gameViewModel.gameMap.collectAsStateWithLifecycle()
+
+    val localID = playerViewModel.getLocalPlayerID()
 
     Column(
         modifier = Modifier
@@ -42,7 +43,7 @@ fun Board(playerViewModel: PlayerViewModel, gameViewModel: GameViewModel, gameID
 
                     Spacer(Modifier.weight(1f))
                     Cell(mark) {
-                        if((playerViewModel.localPlayerId == gameMap.value[gameID]!!.players[gameMap.value[gameID]!!.turn])
+                        if((localID == gameMap.value[gameID]!!.players[gameMap.value[gameID]!!.turn])
                             && gameMap.value[gameID]!!.board[coordinates] == 2) {
                             val newBoard = gameMap.value[gameID]!!.board.toMutableList()
                             val turn = gameMap.value[gameID]!!.turn
