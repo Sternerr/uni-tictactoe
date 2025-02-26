@@ -1,9 +1,12 @@
 package com.noah.tictactoe
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.noah.tictactoe.data.PlayerViewModel
+import com.noah.tictactoe.data.PreferenceManager
 import com.noah.tictactoe.ui.screens.GameScreen
 import com.noah.tictactoe.ui.screens.LobbyScreen
 import com.noah.tictactoe.ui.screens.LoginScreen
@@ -11,9 +14,12 @@ import com.noah.tictactoe.ui.screens.ResultScreen
 
 @Composable
 fun Application() {
-    val navController = rememberNavController()
-    val playerViewModel = PlayerViewModel()
+    val context = LocalContext.current
+    val preferenceManager = PreferenceManager(context)
+    val playerViewModel = PlayerViewModel(preferenceManager)
     val gameViewModel = GameViewModel()
+
+    val navController = rememberNavController()
 
     NavHost(navController, startDestination = "join") {
         composable(route = "join") {

@@ -15,10 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.noah.tictactoe.Game
 import com.noah.tictactoe.GameViewModel
-import com.noah.tictactoe.Player
-import com.noah.tictactoe.PlayerViewModel
+import com.noah.tictactoe.data.PlayerViewModel
 import com.noah.tictactoe.ui.comonents.Block
 import com.noah.tictactoe.ui.comonents.Board
 import com.noah.tictactoe.ui.comonents.Container

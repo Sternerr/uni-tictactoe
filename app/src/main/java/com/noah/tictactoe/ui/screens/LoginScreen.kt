@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -20,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.noah.tictactoe.PlayerViewModel
+import com.noah.tictactoe.data.PlayerViewModel
 import com.noah.tictactoe.ui.comonents.Block
 import com.noah.tictactoe.ui.comonents.Container
 import com.noah.tictactoe.ui.comonents.CustomButton
@@ -34,9 +35,9 @@ fun LoginScreen(navController: NavController, playerViewModel: PlayerViewModel) 
     val errorMessage = remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
-        Log.d("debug", "LoginScreen: ${playerList.value}")
+        Log.d("debug", "LoginScreen: Started")
 
-        if(playerViewModel.localPlayerId != null) {
+        if(playerViewModel.getLocalPlayerID() != null) {
             navController.navigate("lobby")
         }
     }
@@ -50,7 +51,7 @@ fun LoginScreen(navController: NavController, playerViewModel: PlayerViewModel) 
                 style = TextStyle(
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             )
         }
@@ -66,17 +67,18 @@ fun LoginScreen(navController: NavController, playerViewModel: PlayerViewModel) 
                 label = { Text("Player name")  },
 
                 colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color(0xFF292934),
-                    unfocusedContainerColor =  Color(0xFF292934),
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White,
-                    errorIndicatorColor = Color.Red
+                    focusedContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    unfocusedContainerColor =  MaterialTheme.colorScheme.surfaceContainer,
+                    focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
                 ),
 
                 supportingText = { Text( errorMessage.value ) },
             )
         }
+
         Spacer(Modifier.height(32.dp))
+
         Block {
             CustomButton(
                 text = "Join Lobby"
