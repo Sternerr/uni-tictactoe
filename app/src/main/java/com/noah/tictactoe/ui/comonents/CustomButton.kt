@@ -19,12 +19,13 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun CustomButton(
     text: String,
+    textStyle: TextStyle = TextStyle(
+        fontSize = 24.sp,
+        fontWeight = FontWeight.Bold
+    ),
     onClick: () -> Unit
 ) {
     Button(
-        modifier = Modifier
-            .fillMaxWidth(),
-
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = Color.White
@@ -36,10 +37,7 @@ fun CustomButton(
         Text(
             modifier = Modifier.padding(4.dp),
             text = text,
-            style = TextStyle(
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
-            )
+            style = textStyle
         )
     }
 }
