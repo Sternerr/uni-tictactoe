@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.Update
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.ktx.firestore
@@ -20,17 +21,15 @@ import kotlinx.coroutines.flow.StateFlow
 
 @IgnoreExtraProperties
 data class Player(
-    @get:Exclude val id: String = "",
-    val name: String,
+    val name: String = "",
 )
 
 class PlayerViewModel: ViewModel() {
     private val firestore = Firebase.firestore
-    private val _playerMap: MutableStateFlow<MutableMap<Int, Player>> = MutableStateFlow( mutableMapOf(
-        0 to Player(id = "2dsVssdQg2DdQoDn6520", name = "Noah")
-    ))
-    val playerMap: StateFlow<Map<Int, Player>> = this._playerMap
+    private val _playerMap: MutableStateFlow<MutableMap<String, Player>> = MutableStateFlow( mutableMapOf() )
+    val playerMap: StateFlow<Map<String, Player>> = this._playerMap
 
+    var localPlayerId: String? = null
 
     init {
         this.getPlayers()
@@ -42,7 +41,9 @@ class PlayerViewModel: ViewModel() {
         )
 
         this.firestore.collection("players").add(newPlayer)
-        this._playerMap.value[0] = newPlayer
+            .addOnSuccessListener {
+                this.localPlayerId = it.id
+            }
     }
 
     fun deletePlayer(id: String) {
@@ -61,22 +62,9 @@ class PlayerViewModel: ViewModel() {
 
 
                 if (snapshots != null) {
-                    val newMap: MutableMap<Int, Player> = mutableMapOf()
-
-                    if(this._playerMap.value[0] != null) {
-                        newMap[0] = this._playerMap.value[0]!!
-                    }
-
-                    for (snapshot in snapshots) {
-                        val newPlayer = Player(
-                            id = snapshot.id,
-                            name = snapshot.data.getValue("name").toString()
-                        )
-
-                        if(newMap[0]?.id != newPlayer.id) {
-                            newMap[newMap.size + 1] = newPlayer
-                        }
-                    }
+                    val newMap = snapshots.documents.associate { doc ->
+                        doc.id to doc.toObject(Player::class.java)!!
+                    } as MutableMap<String, Player>
 
                     this._playerMap.value = newMap
                 }
