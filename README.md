@@ -1,6 +1,6 @@
 <div align="center">
   
-# School Project - TicTacToe
+# University Project - TicTacToe
 _A simple multiplayer game with Kotlin, Jetpack Compose, and Firestore._
 
 
