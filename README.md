@@ -1,5 +1,7 @@
 # University Project - TicTacToe
 
+CS | Android Development | Okt - Dec, 2024
+
 A simple multiplayer game built with Kotlin, Jetpack Compose, and Firestore.
 
 ## Technologies Used
